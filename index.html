@@ -4,7 +4,7 @@
 		    <title>OpenIR: Jakarta Study Area</title>
 		    <meta http-equiv='imagetoolbar' content='no'/>
 		    <style type="text/css"> v\:* {behavior:url(#default#VML);}
-		        html, body { overflow: hidden; padding: 0; height: 100%; width: 100%; font-family: 'Lucida Grande',Geneva,Arial,Verdana,sans-serif; }
+		        html, body { overflow: hidden; padding: 0; height: 100%; width: 100%; font-family: Palatino; }
 		        body { margin: 10px; background: #fff; }
 		        h1 { margin: 0; padding: 6px; border:0; font-size: 20pt; }
 		        #header { height: 43px; padding: 0; background-color: #eee; border: 1px solid #888; }
@@ -73,7 +73,7 @@
 	            var overlay_321 = new OpenLayers.Layer.TMS( "True Color: 321", "",
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_get321TileURL, alpha: true, 
-						isBaseLayer: false
+						visibility: false, isBaseLayer: false
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_321.setOpacity(0.7); }
 				
@@ -89,7 +89,7 @@
 	            var overlay_543 = new OpenLayers.Layer.TMS( "True Color: 543", "",
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_get543TileURL, alpha: true, 
-						isBaseLayer: false
+						visibility: false, isBaseLayer: false
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_543.setOpacity(0.7); }
 				
@@ -97,7 +97,7 @@
 	            var overlay_453 = new OpenLayers.Layer.TMS( "True Color: 453", "",
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_get453TileURL, alpha: true, 
-						isBaseLayer: false
+						visibility: false, isBaseLayer: false
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_453.setOpacity(0.7); }
 
@@ -105,7 +105,7 @@
 	            var overlay_754 = new OpenLayers.Layer.TMS( "Moisture: 754", "",
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_get754TileURL, alpha: true, 
-						isBaseLayer: false
+						visibility: false, isBaseLayer: false
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_754.setOpacity(0.7); }
 
@@ -114,7 +114,7 @@
 	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754]);
 	            // Google.v3 uses EPSG:900913 as projection, so we have to
 				// transform our coordinates
-				map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
+				map.setCenter(new OpenLayers.LonLat(106.84268, -6.20929).transform(
 					new OpenLayers.Projection("EPSG:4326"),
 					map.getProjectionObject()
 				), 5);
@@ -123,7 +123,7 @@
 	            map.addControl(switcherControl);
 	            switcherControl.maximizeControl();
 	
-	            map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
+	           map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
 			
 	            map.addControl(new OpenLayers.Control.PanZoomBar());
 	            map.addControl(new OpenLayers.Control.MousePosition());
@@ -218,12 +218,12 @@
 	            if (this.map.baseLayer.name == 'Virtual Earth Roads' || this.map.baseLayer.name == 'Virtual Earth Aerial' || this.map.baseLayer.name == 'Virtual Earth Hybrid') {
 	               z = z + 1;
 	            }
-		        if (mapBounds.intersectsBounds( bounds ) && z >= mapMinZoom && z <= mapMaxZoom ) {
+		       // if (mapBounds.intersectsBounds( bounds ) && z >= mapMinZoom && z <= mapMaxZoom ) {
 	               //console.log( this.url + z + "/" + x + "/" + y + "." + this.type);
 	               return this.url + "Tiles_Jakarta754/" + z + "/" + x + "/" + y + "." + this.type;
-                } else {
-                   return "http://www.maptiler.org/img/none.png";
-                }
+              //  } else {
+                //   return "http://www.maptiler.org/img/none.png";
+                //}
 	        }		
 			
 		   function getWindowHeight() {
