@@ -75,15 +75,15 @@
 						type: 'png', getURL: overlay_get321TileURL, alpha: true, 
 						visibility: false, isBaseLayer: false
 	                });
-				if (OpenLayers.Util.alphaHack() == false) { overlay_321.setOpacity(0.9); }
+				if (OpenLayers.Util.alphaHack() == false) { overlay_321.setOpacity(1); }
 				
 				// create 432 Overlay layer
 	            var overlay_432 = new OpenLayers.Layer.TMS( "Vegetation: 432", "",
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_get432TileURL, alpha: true, 
-						isBaseLayer: false
+						visibility: false, isBaseLayer: false
 	                });
-				if (OpenLayers.Util.alphaHack() == false) { overlay_432.setOpacity(0.9); }
+				if (OpenLayers.Util.alphaHack() == false) { overlay_432.setOpacity(1); }
 				
 				// create 543 Overlay layer
 	            var overlay_543 = new OpenLayers.Layer.TMS( "Urban: 543", "",
@@ -91,7 +91,7 @@
 						type: 'png', getURL: overlay_get543TileURL, alpha: true, 
 						visibility: false, isBaseLayer: false
 	                });
-				if (OpenLayers.Util.alphaHack() == false) { overlay_543.setOpacity(0.9); }
+				if (OpenLayers.Util.alphaHack() == false) { overlay_543.setOpacity(1); }
 				
 				// create 453 Overlay layer
 	            var overlay_453 = new OpenLayers.Layer.TMS( "Soil: 453", "",
@@ -99,7 +99,7 @@
 						type: 'png', getURL: overlay_get453TileURL, alpha: true, 
 						visibility: false, isBaseLayer: false
 	                });
-				if (OpenLayers.Util.alphaHack() == false) { overlay_453.setOpacity(0.9); }
+				if (OpenLayers.Util.alphaHack() == false) { overlay_453.setOpacity(1); }
 
 	            // create 754 Overlay layer
 	            var overlay_754 = new OpenLayers.Layer.TMS( "Moisture: 754", "",
@@ -107,14 +107,14 @@
 						type: 'png', getURL: overlay_get754TileURL, alpha: true, 
 						visibility: false, isBaseLayer: false
 	                });
-				if (OpenLayers.Util.alphaHack() == false) { overlay_754.setOpacity(0.9); }
+				if (OpenLayers.Util.alphaHack() == false) { overlay_754.setOpacity(1); }
 
 	            map.addLayers([gmap, gsat, ghyb, gter, veroad, veaer, vehyb,
 	                           yahoo, yahoosat, yahoohyb, osm, 
 	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754]);
 	            // Google.v3 uses EPSG:900913 as projection, so we have to
 				// transform our coordinates
-				map.setCenter(new OpenLayers.LonLat(106.84268, -6.20929).transform(
+				map.setCenter(new OpenLayers.LonLat(106.84268, -6.14929).transform(
 					new OpenLayers.Projection("EPSG:4326"),
 					map.getProjectionObject()
 				), 5);
@@ -123,8 +123,15 @@
 	            map.addControl(switcherControl);
 	            switcherControl.maximizeControl();
 	
-	           map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
-			
+	           //map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
+	           mapBounds.transform(map.displayProjection, map.projection );
+	           map.zoomIn();
+	           map.zoomIn();
+	           map.zoomIn();
+	           map.zoomIn();
+	           map.zoomIn();
+	           map.zoomIn();
+				
 	            map.addControl(new OpenLayers.Control.PanZoomBar());
 	            map.addControl(new OpenLayers.Control.MousePosition());
 	            map.addControl(new OpenLayers.Control.MouseDefaults());
