@@ -100,6 +100,15 @@
 						visibility: false, isBaseLayer: false
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_453.setOpacity(1); }
+                
+                // create Elevation Overlay layer
+	            var overlay_elevation = new OpenLayers.Layer.TMS( "Elevation", "",
+	                {   // url: '', serviceVersion: '.', layername: '.',
+						type: 'png', getURL: overlay_getElevationTileURL, alpha: true, 
+						visibility: false, isBaseLayer: false
+	                });
+				if (OpenLayers.Util.alphaHack() == false) { overlay_elevation.setOpacity(1); }
+                
 
 	            // create 754 Overlay layer
 	            var overlay_754 = new OpenLayers.Layer.TMS( "Moisture: 754", "",
@@ -111,7 +120,7 @@
 
 	            map.addLayers([gmap, gsat, ghyb, gter, veroad, veaer, vehyb,
 	                           yahoo, yahoosat, yahoohyb, osm, 
-	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754]);
+	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754,overlay_elevation]);
 	            // Google.v3 uses EPSG:900913 as projection, so we have to
 				// transform our coordinates
 				map.setCenter(new OpenLayers.LonLat(106.84268, -6.14929).transform(
@@ -184,6 +193,23 @@
                    return "http://www.maptiler.org/img/none.png";
                 }
 	        }
+
+	        function overlay_getElevationTileURL(bounds) {
+	            var res = this.map.getResolution();
+	            var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+	            var y = Math.round((bounds.bottom - this.tileOrigin.lat) / (res * this.tileSize.h));
+	            var z = this.map.getZoom();
+	            if (this.map.baseLayer.name == 'Virtual Earth Roads' || this.map.baseLayer.name == 'Virtual Earth Aerial' || this.map.baseLayer.name == 'Virtual Earth Hybrid') {
+	               z = z + 1;
+	            }
+		        if (mapBounds.intersectsBounds( bounds ) && z >= mapMinZoom && z <= (mapMaxZoom-2) ) {
+	               //console.log( this.url + z + "/" + x + "/" + y + "." + this.type);
+	               return this.url + "Tiles_Jakarta_Elevation/" + z + "/" + x + "/" + y + "." + this.type;
+                } else {
+                   return "http://www.maptiler.org/img/none.png";
+                }
+	        }
+            
 	        
 	        function overlay_get543TileURL(bounds) {
 	            var res = this.map.getResolution();
