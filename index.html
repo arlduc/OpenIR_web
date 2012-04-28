@@ -121,8 +121,8 @@
 	                });
 				if (OpenLayers.Util.alphaHack() == false) { overlay_754.setOpacity(1); }
 
-	            map.addLayers([gmap, gsat, ghyb, gter, veroad, veaer, vehyb,
-	                           yahoo, yahoosat, yahoohyb, osm, 
+	            map.addLayers([gmap,
+                                osm, 
 	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754,overlay_elevation]);
 	            // Google.v3 uses EPSG:900913 as projection, so we have to
 				// transform our coordinates
