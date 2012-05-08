@@ -128,7 +128,7 @@
 	                {   // url: '', serviceVersion: '.', layername: '.',
 						type: 'png', getURL: overlay_getRiskTileURL, alpha: true, 
 						visibility: false, isBaseLayer: false
-	                });
+	                },{attribution:"Provided by Telascience"});
 				if (OpenLayers.Util.alphaHack() == false) { overlay_754.setOpacity(1); }                
                 
                 
@@ -136,15 +136,13 @@
                 
                 //create the layer that has the Map Key
                 var graphic = new OpenLayers.Layer.Image(
-                'City Lights',
+                'map_key',
                 'http://openir.media.mit.edu/jakarta/MockupKey.png',
                 new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
                 new OpenLayers.Size(580, 288),
-                {numZoomLevels: 9}
-            );
-            
-            var vector = new OpenLayers.Layer.Vector("map_Key_vector",
-                              {attribution:"Vector Attibution in 2nd arg"});
+                {numZoomLevels: 3}
+            )
+
                 graphic.events.on({
                 loadstart: function() {
                     OpenLayers.Console.log("loadstart");
@@ -160,8 +158,9 @@
                 
                 
                 
-	            map.addLayers([vector, gmap,osm, 
-	                           overlay_321, overlay_432, overlay_543, overlay_453, overlay_754,overlay_elevation,overlay_risk]);
+	            map.addLayers([gmap,osm, overlay_321, overlay_432, overlay_543, overlay_453, overlay_754,overlay_elevation,overlay_risk]);
+                               
+                               
 	            // Google.v3 uses EPSG:900913 as projection, so we have to
 				// transform our coordinates
 				map.setCenter(new OpenLayers.LonLat(106.84268, -6.14929).transform(
@@ -172,6 +171,7 @@
 	            var switcherControl = new OpenLayers.Control.LayerSwitcher();
 	            map.addControl(switcherControl);
 	            switcherControl.maximizeControl();
+                map.addControl(new OpenLayers.Control.Attribution());
 	
 	           //map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ) );
 	           mapBounds.transform(map.displayProjection, map.projection );
@@ -364,11 +364,11 @@
             <img alt="you can't view logo" src="../tmp/OpenIR_logo.png" /></a> <hr>
             <nav>
                 <ul style="font-family: 'UbahnRegular'; font-size: large">
-                    <li><a href="./" title="Home">Home</a></li>
-                    <li><a href="./develop.html" title="Development">Development</a></li>
-                    <li><a href="./team.html" title="Team">Team</a></li>
-                    <li><a href="./about.html" title="About">About</a></li>
-                    <li><a href="./contact.html" title="Contact">Contact</a></li>
+                    <li><a href="../" title="Home">Home</a></li>
+                    <li><a href="../develop.html" title="Development">Development</a></li>
+                    <li><a href="../team.html" title="Team">Team</a></li>
+                    <li><a href="../about.html" title="About">About</a></li>
+                    <li><a href="../contact.html" title="Contact">Contact</a></li>
                 </ul>
             </nav>
             </header>
